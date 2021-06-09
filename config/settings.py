@@ -81,13 +81,20 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'mydatabase',
+        'USER': 'mydatabaseuser',
+        'PASSWORD': 'mypassword',
+        'HOST': 'localhost',
+        'PORT': '1000',
     }
 }
 import dj_database_url
 db_from_env = dj_database_url.config(conn_max_age=600)
 DATABASES['default'].update(db_from_env)
+# 1. fix this local database docker set up.
+# 2. check if this database is independent from heroku. see if this database setting has any impact.
+#    which means, i need to delete heroku database and restart it again. see!!
 
 
 # Password validation
